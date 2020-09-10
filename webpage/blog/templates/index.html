@@ -1,95 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <title>Project Three: Expanded Web Presence</title>
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link rel="stylesheet" href="css/screen.css" />
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
-  </head>
-  <body>
-    <header id="cover-page">
-      <h1 id="intro-header">The journey of Yuzhe Lim</h1>
-      <p>Engineering | Adventures | Competitions</p>
-        <nav id="navigation">
-          <ul class="nav">
-            <li><a href="">Home</a></li>
-            <li><a href="workExperience/">Work Experience</a></li>
-            <li><a href="competition/">Competitions</a></li>
-            <li><a href="contact/">Contact</a></li>
-          </ul>
-        </nav>
-    </header>
-    <main>
-      <section id="summary">
-        <h2>What I do in Computer Engineering</h2>
-        <article class="intro">
-          <figure>
-            <a href="workExperience/">
-              <img src="media/intel.jpg"
-                alt="A picture of Yuzhe Lim at Intel" />
-            </a>
-          </figure>
-          <h3>Work Experience</h3>
-          <p>
-            A summary of my working experience through college. As I believe
-            that learning is an active process and should not be restricted to
-            just the classroom, I embarked on my first internship during my
-            sophomore year and i've had 4 internship/co-op experiences up till
-            this point.
-          </p>
-        </article>
-        <article class="intro">
-          <figure>
-            <a href="competition/">
-              <img src="media/ssh2.jpg"
-                alt="A picture of Yuzhe and team in NASA RMC 2018" />
-            </a>
-          </figure>
-          <h3>Competitions</h3>
-          <p>
-            A summary of competitions that I participated in college. Besides
-            being a student or intern, I am also actively involved in robotics
-            competitions and hackathons. I started because my passion in
-            robotics and found out that I really enjoy making cool robots with
-            liked-minded engineering students.
-          </p>
-        </article>
-        <article class="intro">
-          <figure>
-            <a href="contact/">
-              <img src="media/coding.jpg"
-                alt="A picture of Yuzhe Lim coding on his laptop" />
-            </a>
-          </figure>
-          <h3>Personal Information</h3>
-          <p>
-            My contact information.
-          </p>
-        </article>
-      </section>
-    </main>
-    <footer>
-      <figure>
-        <a href="https://www.linkedin.com/in/yuzhelim/">
-          <img src="media/linkedin_logo.png"
-            alt="Logo of LinkedIn" />
-        </a>
-        <figcaption>
-          LinkedIn Profile
-        </figcaption>
-      </figure>
-      <figure>
-        <a href="https://github.com/louisyuzhe">
-          <img src="media/github_logo.png"
-            alt="Logo of GitHub" />
-        </a>
-        <figcaption>
-          GitHub Profile
-        </figcaption>
-      </figure>
-      <small>Site content and design © Yuzhe Lim.</small>
-    </footer>
-  </body>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <title>First Blog</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>First Blog</h1>
+    <hr />
+    {% for post in posts %}
+        <div class="post">
+        <h2>{{ post.title }}</h2>
+        <h3>Posted on {{ post.timestamp }} by {{ post.author }}</h3>
+        <p>{{ post.bodytext }}</p>
+        </div>
+        <hr />
+    {% endfor %}
+</div>
+
+</body>
+
 </html>
