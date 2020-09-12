@@ -4,7 +4,7 @@ start sql
 "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld"
 
 start server
-python manange.py runserver
+python manage.py runserver
 
 Update db
 python manage.py makemigrations
