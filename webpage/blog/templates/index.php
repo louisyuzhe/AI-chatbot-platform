@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/blog/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -16,6 +16,7 @@
     <header id="mainmenu-header">
     </header>
     <main>
+      <h1>SimpleBot</h1>
       <div id="app" class="container top-padding">
       	<div class="row">
       		<div class="col-md-12">
