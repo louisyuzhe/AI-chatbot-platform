@@ -1,8 +1,23 @@
 from django.shortcuts import render
 from blog.models import posts
+from django.http import HttpResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+from chatterbot import ChatBot
 
 # Create your views here.
  
+"""
+Instantiating a ChatBot Instance
+"""
+#chatbot will be set to read_only to avoid learning after training
+# Train based on the english corpus
+chatbot1 = ChatBot(name = 'chatbot1',
+                  read_only = False,                  
+                  logic_adapters = ["chatterbot.logic.BestMatch"],                 
+                  storage_adapter = "chatterbot.storage.SQLStorageAdapter")
+
+
 def home(request):
     """
     content = {
@@ -14,3 +29,27 @@ def home(request):
     """
     entries = posts.objects.all()[:10]
     return render(request, 'index.html', {'posts' : entries})
+
+@csrf_exempt
+def get_response(request):
+	response = {'status': None}
+
+	if request.method == 'POST':
+		data = json.loads(request.body.decode('utf-8'))
+		message = data['message']
+
+		chat_response = chatbot1.get_response(message).text
+		response['message'] = {'text': chat_response, 'user': False, 'chat_bot': True}
+		response['status'] = 'ok'
+
+	else:
+		response['error'] = 'no post data found'
+
+	return HttpResponse(
+		json.dumps(response),
+			content_type="application/json"
+		)
+
+def chatbot(request, template_name="index.php"):
+    context = {'title': 'Chatbot 1.0'}
+    return render(request, template_name, context)
