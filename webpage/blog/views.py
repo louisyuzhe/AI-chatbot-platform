@@ -50,6 +50,6 @@ def get_response(request):
 			content_type="application/json"
 		)
 
-def chatbot(request, template_name="index.php"):
+def chatbot(request, template_name="chatbot.html"):
     context = {'title': 'Chatbot 1.0'}
     return render(request, template_name, context)
