@@ -1,0 +1,4 @@
+1. Add scrolllable pane for chatbot window
+2. Add light mode, dark mode effect
+3. Add color theme 
+4. Add train window
