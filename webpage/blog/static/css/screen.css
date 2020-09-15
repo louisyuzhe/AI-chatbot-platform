@@ -1,0 +1,47 @@
+.top-padding {
+	margin-top: 10px;
+}
+
+.user-message {
+	background-color: cyan;
+	color: white;
+}
+
+.chat-message {
+	background-color: hotpink;
+	color: white;
+}
+
+.send-btn {
+	position: absolute;
+  top: 12px;
+  font-size: 50px;
+  color: grey;
+  right: 20px;
+}
+
+.send-btn:hover {
+	color: green;
+}
+
+#text-box {
+	position: relative;
+	bottom: 8px;
+	width: 95%;
+}
+
+#text-box textarea {
+	border: 2px solid;
+}
+
+#app {
+	margin-left: 0px;
+}
+
+#app .card {
+	margin-bottom: 5px;
+}
+
+#app p {
+	margin-bottom: 0px;
+}
