@@ -18,7 +18,7 @@
     <main>
       <h1>SimpleBot</h1>
       <div id="app" class="container top-padding">
-      	<div class="row">
+      	<div id="chatbox" class="row">
       		<div class="col-md-12">
       			<div class="card col-md-6" v-for="message in messages" v-bind:class="{ 'user-message': message.user,  'chat-message': message.chat_bot, 'offset-md-6': message.chat_bot}">
     	  			<div class="card-body">
