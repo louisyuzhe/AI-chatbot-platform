@@ -5,3 +5,4 @@
 5. Header use Expand at md from bootstrap (fixed nav bar)
 6. Use carousel for webwsite structure
 7. Add dashboard page (display question ask & frequency)
+8. Add preprocessor ('chatterbot.preprocessors.clean_whitespace')
