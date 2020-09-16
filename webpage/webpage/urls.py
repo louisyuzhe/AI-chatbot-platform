@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('get-response/', views.get_response),
     path('chatbot/', views.chatbot),
+    path('dashboard/', views.dashboard),
 ]
 
 if settings.DEBUG == True:
