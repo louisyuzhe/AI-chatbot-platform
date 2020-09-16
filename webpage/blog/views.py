@@ -5,6 +5,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from chatterbot import ChatBot
 from chatterbot.ext.django_chatterbot.models import Statement, Tag
+from django.db.models import Count
 
 # Create your views here.
  
@@ -57,6 +58,17 @@ def chatbot(request, template_name="chatbot.html"):
     return render(request, template_name, context)
 
 def dashboard(request, template_name="dashboard.html"):
-    entries = Statement.objects.all()[:10]
-    context = {'title': 'Dashboard', 'chatterbot_data' : entries}
+    entries = Statement.objects.all()
+    """
+    q1 = Statement.objects.values("search_text").annotate(resp_freq=Count("search_text")).order_by('-resp_freq')
+    print(q1)
+    q2 = Statement.objects.values("in_response_to").annotate(Count("text")).order_by()
+    print(q2)
+    q3 = Statement.objects.values("text").annotate(Count("in_response_to")).order_by() #how many in_response_to per text
+    print(q3)
+    q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
+    print(q4)
+    """
+    q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
+    context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4}
     return render(request, template_name, context)
