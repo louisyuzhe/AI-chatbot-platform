@@ -15,7 +15,8 @@ Instantiating a ChatBot Instance
 chatbot1 = ChatBot(name = 'chatbot1',
                   read_only = False,                  
                   logic_adapters = ["chatterbot.logic.BestMatch"],                 
-                  storage_adapter = "chatterbot.storage.SQLStorageAdapter")
+                  storage_adapter = "chatterbot.storage.SQLStorageAdapter",
+                  database_uri='mysql://root:G7h7y7%40%40@127.0.0.1:3306/firstblog')
 
 
 def home(request):
