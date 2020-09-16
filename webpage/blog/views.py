@@ -4,6 +4,7 @@ from django.http import HttpResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 from chatterbot import ChatBot
+from chatterbot.ext.django_chatterbot.models import Statement, Tag
 
 # Create your views here.
  
@@ -56,5 +57,6 @@ def chatbot(request, template_name="chatbot.html"):
     return render(request, template_name, context)
 
 def dashboard(request, template_name="dashboard.html"):
-    context = {'title': 'Dashboard'}
+    entries = Statement.objects.all()[:10]
+    context = {'title': 'Dashboard', 'chatterbot_data' : entries}
     return render(request, template_name, context)
