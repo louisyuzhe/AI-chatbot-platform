@@ -54,3 +54,7 @@ def get_response(request):
 def chatbot(request, template_name="chatbot.html"):
     context = {'title': 'Chatbot 1.0'}
     return render(request, template_name, context)
+
+def dashboard(request, template_name="dashboard.html"):
+    context = {'title': 'Dashboard'}
+    return render(request, template_name, context)
