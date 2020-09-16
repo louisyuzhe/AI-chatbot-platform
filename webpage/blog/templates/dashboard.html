@@ -195,6 +195,67 @@
     <script src="/blog/templates/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="/blog/templates/dashboard.js"></script>
   </body>
 </html>
+
+<script type="text/javascript">
+/* globals Chart:false, feather:false */
+
+  var in_response_toArr = [];
+  var resp_freqArr = [];
+
+  {% for a in in_response_to_query %}
+    in_response_toArr.push("{{a.in_response_to}}");
+    resp_freqArr.push("{{a.resp_freq}}");
+  {% endfor %}
+
+  (function () {
+    'use strict'
+
+    feather.replace()
+
+    // Graphs
+    var ctx = document.getElementById('myChart')
+    // eslint-disable-next-line no-unused-vars
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: in_response_toArr,
+        datasets: [{
+          data: resp_freqArr,
+          lineTension: 0,
+          backgroundColor: 'cyan',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Count'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Chatbot responded to'
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Count of in_response_to'
+        }
+      }
+    })
+  }())
+</script>
