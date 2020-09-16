@@ -5,6 +5,7 @@ start sql
 
 start server
 python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
 
 Update db
 python manage.py makemigrations
