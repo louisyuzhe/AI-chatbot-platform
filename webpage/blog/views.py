@@ -72,3 +72,7 @@ def dashboard(request, template_name="dashboard.html"):
     q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
     context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4}
     return render(request, template_name, context)
+
+def training(request, template_name="training.html"):
+    context = {'title': 'Chatbot 1.0'}
+    return render(request, template_name, context)
