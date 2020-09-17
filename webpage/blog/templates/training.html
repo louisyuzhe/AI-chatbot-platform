@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>{{ title }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+        html {
+          font-size: 16px;
+        }
+      }
+
+      #dataset-uploads {
+        width: 0;
+      }
+
+      #uploadPreview p{
+        background: #eee;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        list-style-type: none;
+        border: 1px solid black;
+      }
+
+      label[for="dataset-uploads"] {
+        background-color: #7F9CCB;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px ridge black;
+        font-size: 0.8rem;
+        height: auto;
+      }
+
+      label[for="dataset-uploads"]:hover {
+        background-color: #2D5BA3;
+        color: white;
+      }
+
+      label[for="dataset-uploads"]:active {
+        background-color: #0D3F8F;
+        color: white;
+      }
+
+      .container {
+        max-width: 960px;
+      }
+
+      .pricing-header {
+        max-width: 700px;
+      }
+
+      .card-deck .card {
+        min-width: 220px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <header id="mainmenu-header">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">SimpleBot</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../chatbot/" >Chat</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="" >Training</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../dashboard/" >Analysis</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Option</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <a class="dropdown-item" href="#">Action 2</a>
+                <a class="dropdown-item" href="#">Action 3</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <input class="form-control" type="text" placeholder="Search">
+          </form>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">SimpleBot Training</h1>
+        <p class="lead">Chatbot training is an ongoing process that doesn’t end after chatbots launch. To always keep up with user needs you have to improve your bot constantly.</p>
+      </div>
+
+      <div class="container">
+        <div class="card-deck mb-3 text-center">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Custom Dataset</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>
+                  <label for="dataset-uploads">Choose dataset to upload (yml, txt, json)</label>
+                  <input type="file" id="dataset-uploads" name="dataset-uploads" accept="
+
+                  .txt, .json" multiple>
+                </li>
+                <li id = "uploadPreview">
+                  <p>No files currently selected for upload</p>
+                </li>
+              </ul>
+              <button type="button" class="btn btn-lg btn-block btn-outline-primary">Train</button>
+            </div>
+          </div>
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Corpus Data</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled mt-3 mb-4">
+
+              </ul>
+              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
+            </div>
+          </div>
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">Manual Dialog Input</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled mt-3 mb-4">
+
+              </ul>
+              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </main>
+    <footer>
+      <small>Site content and design by Yuzhe Lim</small>
+    </footer>
+  </body>
+</html>
+
+<script type="text/javascript">
+  const input = document.getElementById('dataset-uploads');
+  const preview = document.getElementById('uploadPreview');
+  input.style.opacity = 0;
+  input.addEventListener('change', trainDataset);
+
+  function trainDataset() {
+    while(preview.firstChild) {
+      preview.removeChild(preview.firstChild);
+    }
+
+    const curFiles = input.files;
+    if(curFiles.length === 0) {
+      const para = document.createElement('p');
+      para.textContent = 'No files currently selected for upload';
+      preview.appendChild(para);
+    } else {
+      const list = document.createElement('div');
+      preview.appendChild(list);
+
+      for(const file of curFiles) {
+        const listItem = document.createElement('li');
+        const para = document.createElement('p');
+        if(validFileType(file)) {
+          para.textContent = file.name;
+        } else {
+          para.textContent = 'File name'+file.name+': Not a valid file type. Update your selection.';
+        }
+        listItem.appendChild(para);
+
+        list.appendChild(listItem);
+      }
+    }
+  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
+  const fileTypes = [
+    "text/plain",
+    "application/json"
+  ];
+
+  function validFileType(file) {
+    return fileTypes.includes(file.type);
+  }
+
+</script>
