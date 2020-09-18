@@ -131,9 +131,7 @@
               <ul class="list-unstyled mt-3 mb-4">
                 <li>
                   <label for="dataset-uploads">Choose dataset to upload (yml, txt, json)</label>
-                  <input type="file" id="dataset-uploads" name="dataset-uploads" accept="
-
-                  .txt, .json" multiple>
+                  <input type="file" id="dataset-uploads" name="dataset-uploads" accept=".txt, .json" multiple>
                 </li>
                 <li id = "uploadPreview">
                   <p>No files currently selected for upload</p>
@@ -144,11 +142,26 @@
           </div>
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Corpus Data</h4>
+              <h4 class="my-0 font-weight-normal">Training Corpus</h4>
             </div>
             <div class="card-body">
               <ul class="list-unstyled mt-3 mb-4">
-
+                <li>
+                  <label for="corpusFull">Full language module</label>
+                </li>
+                <li>
+                  <select id="corpusFull" name="corpusFull" onchange="getScopes(this)">
+                    <option></option>
+                  </select>
+                </li>
+                <li>
+                  <label for="corpusSpecific">Specific corpus scope</label>
+                </li>
+                <li>
+                  <select id="corpusSpecific" name="corpusSpecific">
+                    <option></option>
+                  </select>
+                </li>
               </ul>
               <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
             </div>
@@ -171,12 +184,8 @@
               <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
             </div>
           </div>
-
-
         </div>
       </div>
-
-
     </main>
     <footer>
       <small>Site content and design by Yuzhe Lim</small>
@@ -185,6 +194,7 @@
 </html>
 
 <script type="text/javascript">
+  // Custom Dataset
   const input = document.getElementById('dataset-uploads');
   const preview = document.getElementById('uploadPreview');
   input.style.opacity = 0;
@@ -219,7 +229,6 @@
     }
   }
 
-  // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
   const fileTypes = [
     "text/plain",
     "application/json"
@@ -227,6 +236,39 @@
 
   function validFileType(file) {
     return fileTypes.includes(file.type);
+  }
+  corpusDict = {{ corpusDict|safe }};
+  //Training corpusSpecific
+  var fullCorpusArr = Object.keys(corpusDict);
+  var corpusFull = document.getElementById("corpusFull");
+  //Create array of options to be added
+  for (var i = 0; i < fullCorpusArr.length; i++) {
+    var option = document.createElement("option");
+    option.setAttribute("value", fullCorpusArr[i]);
+    option.text = fullCorpusArr[i];
+    corpusFull.appendChild(option);
+  }
+
+  function getScopes(opt){
+    //Training corpusSpecific
+    var specificCorpusArr = corpusDict[opt.value];
+    var corpusSpecific = document.getElementById("corpusSpecific");
+    //Empty dropdown list for new llist
+    while (corpusSpecific.hasChildNodes()) {
+         corpusSpecific.removeChild(corpusSpecific.lastChild);
+     }
+     var option = document.createElement("option");
+     option.setAttribute("value", "all");
+     option.text = "all";
+     corpusSpecific.appendChild(option);
+
+    //Create array of options to be added
+    for (var i = 0; i < specificCorpusArr.length; i++) {
+      var option = document.createElement("option");
+      option.setAttribute("value", specificCorpusArr[i]);
+      option.text = specificCorpusArr[i];
+      corpusSpecific.appendChild(option);
+    }
   }
 
 </script>
