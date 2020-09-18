@@ -74,5 +74,15 @@ def dashboard(request, template_name="dashboard.html"):
     return render(request, template_name, context)
 
 def training(request, template_name="training.html"):
-    context = {'title': 'Chatbot 1.0'}
+    corpusDict = retrieveCorpus()
+    context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)}
     return render(request, template_name, context)
+
+def retrieveCorpus():
+    import os
+    root_dir = "train_data\chatterbot_corpus\data"
+    corpus_list = {}
+    for dir_, _, files in os.walk(root_dir):
+        corpus_list[dir_.replace("train_data\\chatterbot_corpus\\data\\", "")]=files
+    del corpus_list["train_data\\chatterbot_corpus\\data"]
+    return corpus_list
