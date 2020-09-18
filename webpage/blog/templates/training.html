@@ -37,7 +37,6 @@
       }
 
       #uploadPreview p{
-        background: #eee;
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
@@ -46,7 +45,8 @@
       }
 
       label[for="dataset-uploads"] {
-        background-color: #7F9CCB;
+        background-color: #007bff;
+        color: white;
         padding: 5px 10px;
         border-radius: 5px;
         border: 1px ridge black;
@@ -54,10 +54,7 @@
         height: auto;
       }
 
-      label[for="dataset-uploads"]:hover {
-        background-color: #2D5BA3;
-        color: white;
-      }
+
 
       label[for="dataset-uploads"]:active {
         background-color: #0D3F8F;
@@ -74,6 +71,20 @@
 
       .card-deck .card {
         min-width: 220px;
+      }
+
+      label[for="dataset-uploads"]:hover,
+      .btn-primary:hover {
+        color:#007bff;
+        background-color:white;
+      }
+
+      .card-header {
+        background-color: grey;
+      }
+
+      .card {
+        border-color: grey;
       }
     </style>
 
@@ -137,7 +148,7 @@
                   <p>No files currently selected for upload</p>
                 </li>
               </ul>
-              <button type="button" class="btn btn-lg btn-block btn-outline-primary">Train</button>
+              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
             </div>
           </div>
           <div class="card mb-4 shadow-sm">
