@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <style>
@@ -201,7 +202,10 @@
           </div>
         </div>
       </div>
-      <textarea id="trainProcess" name="trainProcess" rows="8" cols="80">Training Progress</textarea>
+      <div class="text-center">
+        <h2 class="display-5">Training Process Monitor</h2>
+        <textarea id="trainProcess" name="trainProcess" rows="8" cols="130" readonly>Chatbot training started</textarea>
+      </div>
     </main>
     <footer>
       <small>Site content and design by Yuzhe Lim</small>
@@ -289,13 +293,13 @@
 
   $('#manualBtn').click(function(e){
     e.preventDefault();
-    document.getElementById("trainProcess").value = document.getElementById("trainProcess").value+"\nTraining started";
+    document.getElementById("trainProcess").value += "\nTraining started";
     $.ajax({
         type: 'POST',
         url:'',
         data: $('form#manualDialog').serialize(),
         success: function(data){
-            document.getElementById("trainProcess").value = document.getElementById("trainProcess").value+"\n"+data;
+            document.getElementById("trainProcess").value += "\n"+data;
         }
     })
 });
