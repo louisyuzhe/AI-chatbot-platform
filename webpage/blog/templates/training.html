@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
     <style>
       .bd-placeholder-img {
@@ -182,21 +183,25 @@
               <h4 class="my-0 font-weight-normal">Manual Dialog Input</h4>
             </div>
             <div class="card-body">
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>
-                  <label for="responseText">Response</label>
-                  <input type="text" name="responseText" placeholder="I am fine, thank you.">
-                </li>
-                <li>
-                  <label for="inResponseTo">In response to</label>
-                  <input type="text" name="inResponseTo" placeholder="How are you">
-                </li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
+              <form id="manualDialog">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>
+                    <label for="responseText">Response</label>
+                    <input type="text" id="responseText" name="responseText" placeholder="I am fine, thank you.">
+                  </li>
+                  <li>
+                    <label for="inResponseTo">In response to</label>
+                    <input type="text" id="inResponseTo" name="inResponseTo" placeholder="How are you">
+                  </li>
+                </ul>
+                <input type="hidden" id="train_option" name="train_option" value=3>
+                <button type="button" id="manualBtn" name="manualBtn" class="btn btn-lg btn-block btn-primary">Train</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
+      <textarea id="trainProcess" name="trainProcess" rows="8" cols="80">Training Progress</textarea>
     </main>
     <footer>
       <small>Site content and design by Yuzhe Lim</small>
@@ -282,4 +287,16 @@
     }
   }
 
+  $('#manualBtn').click(function(e){
+    e.preventDefault();
+    document.getElementById("trainProcess").value = document.getElementById("trainProcess").value+"\nTraining started";
+    $.ajax({
+        type: 'POST',
+        url:'',
+        data: $('form#manualDialog').serialize(),
+        success: function(data){
+            document.getElementById("trainProcess").value = document.getElementById("trainProcess").value+"\n"+data;
+        }
+    })
+});
 </script>
