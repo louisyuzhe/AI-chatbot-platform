@@ -79,9 +79,9 @@ def dashboard(request, template_name="dashboard.html"):
 def training(request, template_name="training.html"):
     
     if request.method == 'POST':
-        name = request.POST['mytextbox']
-        print(name)
-        return HttpResponse('data sent')
+        train_option = request.POST['train_option']
+        result = trainer(int(train_option), request)
+        return HttpResponse(result)
     else:
         corpusDict = retrieveCorpus()
         context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)} 
@@ -105,13 +105,15 @@ def trainer(train_option, data):
     
     elif(train_option == 3):
         manual_conversation = [
-        "What time does the Bank open?",
-        "The Bank opens at 9AM",]
+            data.POST['inResponseTo'],
+            data.POST['responseText']
+        ]
         
         #Initializing Trainer Object
         trainer = ListTrainer(chatbot1)
         
         #Training BankBot
         trainer.train(manual_conversation)
+        return("Training completed")
         
     
