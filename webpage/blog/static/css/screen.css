@@ -63,6 +63,9 @@ small {
   vertical-align: text-bottom;
 }
 
+#trainProcess {
+	resize: none;
+}
 /*
  * Sidebar
  */
