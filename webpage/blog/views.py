@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from chatterbot import ChatBot
 from chatterbot.ext.django_chatterbot.models import Statement, Tag
 from django.db.models import Count
+from chatterbot.trainers import ListTrainer #train chatbot on a custom list of statements 
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 # Create your views here.
  
@@ -73,9 +75,16 @@ def dashboard(request, template_name="dashboard.html"):
     context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4}
     return render(request, template_name, context)
 
+@csrf_exempt
 def training(request, template_name="training.html"):
-    corpusDict = retrieveCorpus()
-    context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)}
+    
+    if request.method == 'POST':
+        name = request.POST['mytextbox']
+        print(name)
+        return HttpResponse('data sent')
+    else:
+        corpusDict = retrieveCorpus()
+        context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)} 
     return render(request, template_name, context)
 
 def retrieveCorpus():
@@ -86,3 +95,23 @@ def retrieveCorpus():
         corpus_list[dir_.replace("train_data\\chatterbot_corpus\\data\\", "")]=files
     del corpus_list["train_data\\chatterbot_corpus\\data"]
     return corpus_list
+
+def trainer(train_option, data):
+    if(train_option == 2):
+        #instantiate a ChatterBotCorpusTrainer object with the chatbot as arg
+        corpus_trainer = ChatterBotCorpusTrainer(chatbot1)
+        #Train dataset (ChatterBot-Corpus)
+        corpus_trainer.train("train_data/chatterbot_corpus/data/english")
+    
+    elif(train_option == 3):
+        manual_conversation = [
+        "What time does the Bank open?",
+        "The Bank opens at 9AM",]
+        
+        #Initializing Trainer Object
+        trainer = ListTrainer(chatbot1)
+        
+        #Training BankBot
+        trainer.train(manual_conversation)
+        
+    
