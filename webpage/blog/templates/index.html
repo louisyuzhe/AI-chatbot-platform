@@ -1,29 +1,191 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Carousel Template · Bootstrap</title>
 
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/style.css">
-    <link href="images/favicon.ico" rel="shortcut icon">
-    <title>First Blog</title>
-</head>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
-<body>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
 
-  <div class="container">
-    <h1>First Blog</h1>
-    <hr />
-    {% for post in posts %}
-        <div class="post">
-        <h2>{{ post.title }}</h2>
-        <h3>Posted on {{ post.timestamp }} by {{ post.author }}</h3>
-        <p>{{ post.bodytext }}</p>
+    <style>
+      body {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        color: #5a5a5a;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">SimpleBot</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../chatbot/" >Chat</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../training/" >Training</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../dashboard/" >Analysis</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Option</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <a class="dropdown-item" href="#">Action 2</a>
+                <a class="dropdown-item" href="#">Action 3</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <input class="form-control" type="text" placeholder="Search">
+          </form>
         </div>
-        <hr />
-    {% endfor %}
-</div>
+      </nav>
+    </header>
 
-</body>
+<main role="main">
 
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+          <img src="/blog/static/media/ss1.PNG" alt="sample conversation"><rect width="100%" height="100%" fill="#777"/></svg>
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>Self-learning chatbot</h1>
+            <p>Chatbot that learns on the go!</p>
+            <p><a class="btn btn-lg btn-primary" href="../chatbot/" role="button">Try it now</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+          <img src="/blog/static/media/training-header.PNG" alt="Training page screenshot"><rect width="100%" height="100%" fill="#777"/></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>AI chatbot builder platform</h1>
+            <p>Built-in tools available for chatbot training, no code needed!</p>
+            <p><a class="btn btn-lg btn-primary" href="../training/" role="button">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/>
+          <img src="/blog/static/media/table1.PNG" alt="Database table"></svg>
+        <div class="container">
+          <div class="carousel-caption text-right">
+            <h1>Data visualization tool</h1>
+            <p>Transform data from conversation into insightful graph to draw impactful conclusion easily.</p>
+            <p><a class="btn btn-lg btn-primary" href="../dashboard/" role="button">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Real-time analytics. <span class="text-muted">React without delay.</span></h2>
+        <p class="lead">Get analysis of data as the conversation is happening. Get insights and make graph analytics backed business plans using the built-in data visualization tool.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="/blog/static/media/barchart-square.PNG" alt="Barchart">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Easy Training. <span class="text-muted">3 different options offered.</span></h2>
+        <p class="lead">Training a chatbot has never been easier. Choose from the built-in module available in a wide range of popular languages, upload your own training data, or just manually enter a conversation.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="/blog/static/media/training1.PNG" alt="Training corpus module">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Highly customizable, <span class="text-muted">according to your product.</span></h2>
+        <p class="lead">Want to have a 24/7 customer service chatbot or just a chatbot companion? No problem. Chatbot can be tailor-made to suit any of your business or persona needs.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="/blog/static/media/conversation1.PNG" alt="Training corpus module">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+      <script src="/blog/templates/bootstrap.bundle.min.js"></script>
 </html>
