@@ -60,7 +60,7 @@ def chatbot(request, template_name="chatbot.html"):
     return render(request, template_name, context)
 
 def dashboard(request, template_name="dashboard.html"):
-    entries = Statement.objects.all()
+    entries = Statement.objects.filter(conversation='')
     """
     q1 = Statement.objects.values("search_text").annotate(resp_freq=Count("search_text")).order_by('-resp_freq')
     print(q1)
@@ -71,7 +71,7 @@ def dashboard(request, template_name="dashboard.html"):
     q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
     print(q4)
     """
-    q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
+    q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')[:10]
     context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4}
     return render(request, template_name, context)
 
