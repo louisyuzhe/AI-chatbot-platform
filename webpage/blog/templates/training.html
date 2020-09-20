@@ -158,25 +158,28 @@
               <h4 class="my-0 font-weight-normal">Training Corpus</h4>
             </div>
             <div class="card-body">
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>
-                  <label for="corpusFull">Full language module</label>
-                </li>
-                <li>
-                  <select id="corpusFull" name="corpusFull" onchange="getScopes(this)">
-                    <option></option>
-                  </select>
-                </li>
-                <li>
-                  <label for="corpusSpecific">Specific corpus scope</label>
-                </li>
-                <li>
-                  <select id="corpusSpecific" name="corpusSpecific">
-                    <option></option>
-                  </select>
-                </li>
-              </ul>
-              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
+              <form id="corpusModule">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>
+                    <label for="corpusFull">Language module</label>
+                  </li>
+                  <li>
+                    <select id="corpusFull" name="corpusFull" onchange="getScopes(this)">
+                      <option></option>
+                    </select>
+                  </li>
+                  <li>
+                    <label for="corpusSpecific">Specific corpus scope</label>
+                  </li>
+                  <li>
+                    <select id="corpusSpecific" name="corpusSpecific">
+                      <option></option>
+                    </select>
+                  </li>
+                </ul>
+                <input type="hidden" id="train_option" name="train_option" value=2>
+                <button type="button" id="corpusBtn" name="corpusBtn" class="btn btn-lg btn-block btn-primary">Train</button>
+              </form>
             </div>
           </div>
           <div class="card mb-4 shadow-sm">
@@ -293,7 +296,7 @@
 
   $('#manualBtn').click(function(e){
     e.preventDefault();
-    document.getElementById("trainProcess").value += "\nTraining started";
+    document.getElementById("trainProcess").value += "\nManual training started";
     $.ajax({
         type: 'POST',
         url:'',
@@ -302,5 +305,18 @@
             document.getElementById("trainProcess").value += "\n"+data;
         }
     })
-});
+  });
+
+  $('#corpusBtn').click(function(e){
+    e.preventDefault();
+    document.getElementById("trainProcess").value += "\nCorpus module training started";
+    $.ajax({
+        type: 'POST',
+        url:'',
+        data: $('form#corpusModule').serialize(),
+        success: function(data){
+            document.getElementById("trainProcess").value += "\n"+data;
+        }
+    })
+  });
 </script>
