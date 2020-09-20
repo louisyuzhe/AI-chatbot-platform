@@ -101,7 +101,18 @@ def trainer(train_option, data):
         #instantiate a ChatterBotCorpusTrainer object with the chatbot as arg
         corpus_trainer = ChatterBotCorpusTrainer(chatbot1)
         #Train dataset (ChatterBot-Corpus)
-        corpus_trainer.train("train_data/chatterbot_corpus/data/english")
+        #corpus_trainer.train("train_data/chatterbot_corpus/data/english")
+        moduleType = data.POST['corpusSpecific']
+        if(moduleType=="all"):
+            corpusDir = "train_data/chatterbot_corpus/data/"+data.POST['corpusFull']
+            resultStatement = "Training of all corpora of the "+ data.POST['corpusFull'] +" module have been completed"
+        else:
+            corpusDir = "train_data/chatterbot_corpus/data/"+data.POST['corpusFull']+"/"+moduleType
+            resultStatement = "Training of "+ moduleType.replace(".yml", "") +" corpus of the "+ data.POST['corpusFull'] +" module has been completed"
+        corpus_trainer.train(corpusDir)
+
+        return(resultStatement)
+
     
     elif(train_option == 3):
         manual_conversation = [
@@ -114,6 +125,6 @@ def trainer(train_option, data):
         
         #Training BankBot
         trainer.train(manual_conversation)
-        return("Training completed")
+        return("Manual training has been completed")
         
     
