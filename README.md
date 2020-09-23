@@ -39,7 +39,7 @@ Features Offer:
 ![alt text][image3]
 
 ### 4. Data visualization and analytics page
-![alt text][image4]
+<img src=[image4] width="256" height="256" title=[alt text]>
 
 ### 5. Administrator management login
 ![alt text][image5]
