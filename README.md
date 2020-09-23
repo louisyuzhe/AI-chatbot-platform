@@ -24,7 +24,7 @@ Features Offer:
 [image4]: ./README_media/analysis_page.png "Screenshot of visualization page"
 [image5]: ./README_media/admin_page1.png "Screenshot of admin login"
 [image6]: ./README_media/admin_page2.png "Screenshot of admin page"
-[image7]: ./README_media/sqlserver.png "Screenshot of mysql server"
+[image7]: ./README_media/mysql.PNG "Screenshot of mysql server"
 
 ---
 ## Preview
@@ -44,8 +44,8 @@ Features Offer:
 ### 5. Administrator management login
 ![alt text][image5]
 
-### 3. Administrator management page
+### 6. Administrator management page
 ![alt text][image6]
 
-### 4. MySQL Server
+### 7. MySQL Server
 ![alt text][image7]
