@@ -21,7 +21,7 @@ Features Offer:
 [image1]: ./README_media/homepage.png "Screenshot of homepage"
 [image2]: ./README_media/chatbot-page.png "Screenshot of chatbot conversation"
 [image3]: ./README_media/training_page.png "Screenshot of training page"
-[image4]: ./README_media/analysis_page.png "Screenshot of visualization page"
+[image4]: ./README_media/analysis_page.png "Screenshot of visualization page" {:height="50%" width="50%"}
 [image5]: ./README_media/admin_page1.png "Screenshot of admin login"
 [image6]: ./README_media/admin_page2.png "Screenshot of admin page"
 [image7]: ./README_media/mysql.PNG "Screenshot of mysql server"
@@ -40,7 +40,6 @@ Features Offer:
 
 ### 4. Data visualization and analytics page
 ![alt text][image4]
-{: height="36px" width="36px"}
 
 ### 5. Administrator management login
 ![alt text][image5]
