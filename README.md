@@ -44,8 +44,8 @@ Features Offer:
 ### 5. Administrator management login
 ![alt text][image5]
 
-### 3. Administrator management page
+### 6. Administrator management page
 ![alt text][image6]
 
-### 4. MySQL Server
+### 7. MySQL Server
 ![alt text][image7]
