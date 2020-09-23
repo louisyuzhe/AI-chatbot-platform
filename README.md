@@ -14,12 +14,17 @@ Features Offer:
 
 * 4: Simple UI for viewing mySQL data
 
+* 5: Administrator management tools
+
 [//]: # (Image References)
 
 [image1]: ./README_media/homepage.png "Screenshot of homepage"
 [image2]: ./README_media/chatbot-page.png "Screenshot of chatbot conversation"
 [image3]: ./README_media/training_page.png "Screenshot of training page"
 [image4]: ./README_media/analysis_page.png "Screenshot of visualization page"
+[image5]: ./README_media/admin_page1.png "Screenshot of admin login"
+[image6]: ./README_media/admin_page2.png "Screenshot of admin page"
+[image7]: ./README_media/sqlserver.png "Screenshot of mysql server"
 
 ---
 ## Preview
@@ -35,3 +40,12 @@ Features Offer:
 
 ### 4. Data visualization and analytics page
 ![alt text][image4]
+
+### 5. Administrator management login
+![alt text][image5]
+
+### 3. Administrator management page
+![alt text][image6]
+
+### 4. MySQL Server
+![alt text][image7]
