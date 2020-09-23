@@ -24,7 +24,7 @@ Features Offer:
 [image4]: ./README_media/analysis_page.png "Screenshot of visualization page"
 [image5]: ./README_media/admin_page1.png "Screenshot of admin login"
 [image6]: ./README_media/admin_page2.png "Screenshot of admin page"
-[image7]: ./README_media/sqlserver.png "Screenshot of mysql server"
+[image7]: ./README_media/mysql.png "Screenshot of mysql server"
 
 ---
 ## Preview
