@@ -28,6 +28,15 @@
           font-size: 3.5rem;
         }
       }
+      #scrollTable {
+        overflow:scroll;
+        height:40vh;
+      }
+      #scrollTable thead th {
+        background-color: white;
+        position: sticky;
+        top: 0;
+      }
     </style>
     <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
 
@@ -158,7 +167,7 @@
           <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
           <h2>SimpleBot Data</h2>
-          <div class="table-responsive">
+          <div id="scrollTable" class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
