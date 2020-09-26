@@ -164,6 +164,9 @@
             </div>
           </div>
 
+          <button type="button" name="btn_barChart" id="btn_barChart">Bar Chart</button>
+          <button type="button" name="btn_lineChart" id="btn_lineChart">Line Chart</button>
+
           <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
           <h2>SimpleBot Data</h2>
@@ -219,12 +222,12 @@
   var in_response_toArr = [];
   var resp_freqArr = [];
 
-  {% for a in in_response_to_query %}
-    in_response_toArr.push("{{a.in_response_to}}");
-    resp_freqArr.push("{{a.resp_freq}}");
+  {% for responses in in_response_to_query %}
+    in_response_toArr.push("{{responses.in_response_to}}");
+    resp_freqArr.push("{{responses.resp_freq}}");
   {% endfor %}
 
-  (function () {
+  function loadBarChart() {
     'use strict'
 
     feather.replace()
@@ -272,5 +275,63 @@
         }
       }
     })
-  }())
+
+  }
+
+  function loadlineChart() {
+    'use strict'
+
+    feather.replace()
+
+    // Graphs
+    var ctx = document.getElementById('myChart')
+    // eslint-disable-next-line no-unused-vars
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: in_response_toArr,
+        datasets: [{
+          data: resp_freqArr,
+          lineTension: 0,
+          backgroundColor: 'cyan',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Count'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Chatbot responded to'
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Count of in_response_to'
+        }
+      }
+    })
+
+  }
+
+  document.getElementById("btn_barChart").addEventListener("click", loadBarChart);
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadBarChart();
+  });
+
 </script>
