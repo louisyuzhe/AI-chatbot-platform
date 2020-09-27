@@ -5,9 +5,11 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from chatterbot import ChatBot
 from chatterbot.ext.django_chatterbot.models import Statement, Tag
-from django.db.models import Count
+from django.db.models import Count, Max, Sum
 from chatterbot.trainers import ListTrainer #train chatbot on a custom list of statements 
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from django.db.models.functions import TruncDay
+from datetime import datetime
 
 # Create your views here.
  
@@ -84,8 +86,23 @@ def dashboard(request, template_name="dashboard.html"):
     q4 = Statement.objects.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')
     print(q4)
     """
-    q4 = Statement.objects.filter(conversation='').values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')[:10]
-    context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4}
+    nonTrainingData = Statement.objects.filter(conversation='')
+    q1 = nonTrainingData.values("in_response_to").annotate(count=Count("in_response_to"),date=TruncDay('created_at'))#.order_by('date')
+    #print(q1.aggregate(Sum("count")))
+    resp_count_dict={}
+    for responses in q1:
+        temp_key=responses['in_response_to']
+        timeStamp = responses['date']
+        date = timeStamp.strftime("%D")
+    
+        if(temp_key in resp_count_dict.keys()):
+            resp_count_dict[temp_key].append([responses['count'], date])
+        else:
+            resp_count_dict.setdefault(temp_key, [])
+            resp_count_dict[temp_key].append([responses['count'], date])
+    #print(resp_count_dict['Hi'][0][1])
+    q4 = nonTrainingData.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')[:10]
+    context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4, 'resp_count_dict':resp_count_dict}
     return render(request, template_name, context)
 
 @csrf_exempt
