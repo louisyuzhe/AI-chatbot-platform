@@ -171,7 +171,9 @@
         <div id="subButton">
         </div>
 
-          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+          <div id="chartContent">
+            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+          </div>
 
           <h2>SimpleBot Data</h2>
           <div id="scrollTable" class="table-responsive">
@@ -241,7 +243,11 @@ var subbuttonDiv = document.getElementById("subButton");
     feather.replace()
 
     // Graphs
-    var ctx = document.getElementById('myChart')
+    var chartContent = document.getElementById('chartContent');
+    chartContent.innerHTML = '&nbsp;';
+    $('#chartContent').append('<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>');
+
+    ctx = $("#myChart").get(0).getContext("2d");
     // eslint-disable-next-line no-unused-vars
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -352,7 +358,11 @@ var subbuttonDiv = document.getElementById("subButton");
     feather.replace()
 
     // Graphs
-    var ctx = document.getElementById('myChart')
+    var chartContent = document.getElementById('chartContent');
+    chartContent.innerHTML = '&nbsp;';
+    $('#chartContent').append('<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>');
+
+    ctx = $("#myChart").get(0).getContext("2d");
     // eslint-disable-next-line no-unused-vars
     var myChart = new Chart(ctx, {
       type: 'line',
@@ -380,7 +390,7 @@ var subbuttonDiv = document.getElementById("subButton");
           xAxes: [{
             scaleLabel: {
               display: true,
-              labelString: 'Chatbot responded to'
+              labelString: 'Date'
             }
           }]
         },
@@ -389,7 +399,7 @@ var subbuttonDiv = document.getElementById("subButton");
         },
         title: {
           display: true,
-          text: 'Count of in_response_to'
+          text: 'Frquency of in_response_to'
         }
       }
     })
