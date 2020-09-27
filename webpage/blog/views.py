@@ -101,6 +101,7 @@ def dashboard(request, template_name="dashboard.html"):
             resp_count_dict.setdefault(temp_key, [])
             resp_count_dict[temp_key].append([responses['count'], date])
     #print(resp_count_dict['Hi'][0][1])
+    resp_count_dict.pop(None)
     q4 = nonTrainingData.values("in_response_to").annotate(resp_freq=Count("in_response_to")).order_by('-resp_freq')[:10]
     context = {'title': 'Dashboard', 'chatterbot_data' : entries, 'in_response_to_query':q4, 'resp_count_dict':resp_count_dict}
     return render(request, template_name, context)
