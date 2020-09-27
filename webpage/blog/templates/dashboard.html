@@ -164,8 +164,12 @@
             </div>
           </div>
 
-          <button type="button" name="btn_barChart" id="btn_barChart">Bar Chart</button>
-          <button type="button" name="btn_lineChart" id="btn_lineChart">Line Chart</button>
+          <div id="mainButton">
+            <button type="button" name="btn_barChart" id="btn_barChart">Bar Chart</button>
+            <button type="button" name="btn_lineChart" id="btn_lineChart">Line Chart</button>
+          </div>
+        <div id="subButton">
+        </div>
 
           <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
@@ -218,16 +222,20 @@
 
 <script type="text/javascript">
 /* globals Chart:false, feather:false */
-
-  var in_response_toArr = [];
-  var resp_freqArr = [];
-
-  {% for responses in in_response_to_query %}
-    in_response_toArr.push("{{responses.in_response_to}}");
-    resp_freqArr.push("{{responses.resp_freq}}");
-  {% endfor %}
+var subbuttonDiv = document.getElementById("subButton");
 
   function loadBarChart() {
+    while (subbuttonDiv.firstChild) {
+      subbuttonDiv.removeChild(subbuttonDiv.firstChild);
+    }
+
+    var in_response_toArr = [];
+    var resp_freqArr = [];
+    {% for responses in in_response_to_query %}
+      in_response_toArr.push("{{responses.in_response_to}}");
+      resp_freqArr.push("{{responses.resp_freq}}");
+    {% endfor %}
+
     'use strict'
 
     feather.replace()
@@ -278,24 +286,83 @@
 
   }
 
-  function loadlineChart() {
-    'use strict'
+  function loadLineChart() {
+    /*
+    var resp_countArr = [];
 
+    {% for responses in resp_count_dict.keys %}
+      resp_countArr.push("{{responses}}");
+    {% endfor %}
+
+
+    var countArr = [];
+    var dateArr = [];
+
+  rando="Hi";
+    {% for responses in resp_count_dict.Hi %}
+      temp_string = "{{ responses|safe }}".replace(/[[\]]/g,'').replace(/'/g,"");
+      temp_arr = temp_string.split(",");
+      countArr.push(temp_arr[0]);
+      dateArr.push(temp_arr[1]);
+      //alert(temp_arr[1]);
+    {% endfor %}
+*/
+    d={};
+    {% for key, value in resp_count_dict.items %}
+      if (!d["{{key}}"]) {
+          d["{{key}}"] = [];
+      }
+      d["{{key}}"].push("{{value|safe}}");
+    {% endfor %}
+
+  displayLineChart(d, Object.keys(d)[0]);
+  resp_keys = Object.keys(d);
+  while (subbuttonDiv.firstChild) {
+    subbuttonDiv.removeChild(subbuttonDiv.firstChild);
+  }
+  for(var x = 0; x < resp_keys.length; x++){
+    (function () {
+      response=resp_keys[x];
+      var button = document.createElement('button');
+      var t = document.createTextNode(response);
+      button.appendChild(t);
+      button.value=response;
+      button.setAttribute('id', response+"-btn");
+      button.addEventListener("click", function(){
+        displayLineChart(d, button.value);
+      }, false);
+      subbuttonDiv.appendChild(button);
+    }()); // immediate invocation
+  }
+
+
+  }
+
+  function displayLineChart(d, response) {
+    var countArr = [];
+    var dateArr = [];
+    response_arr = d[response];
+    temp_string = d[response][0].replace(/[[\]]/g,'').replace(/'/g,"");
+    temp_arr = temp_string.split(",");
+    for(var x = 0; x < temp_arr.length; x+=2){
+      countArr.push(temp_arr[x]);
+      dateArr.push(temp_arr[x+1]);
+    }
+    'use strict'
     feather.replace()
 
     // Graphs
     var ctx = document.getElementById('myChart')
     // eslint-disable-next-line no-unused-vars
     var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: in_response_toArr,
+        labels: dateArr,
         datasets: [{
-          data: resp_freqArr,
+          data: countArr,
           lineTension: 0,
-          backgroundColor: 'cyan',
           borderColor: '#007bff',
-          borderWidth: 4,
+          borderWdth: 4,
           pointBackgroundColor: '#007bff'
         }]
       },
@@ -330,6 +397,7 @@
   }
 
   document.getElementById("btn_barChart").addEventListener("click", loadBarChart);
+  document.getElementById("btn_lineChart").addEventListener("click", loadLineChart);
   window.addEventListener('DOMContentLoaded', (event) => {
       loadBarChart();
   });
