@@ -37,6 +37,28 @@
         position: sticky;
         top: 0;
       }
+      .graphBtn {
+        border-radius: 5px;
+        border-color: cyan;
+        background-color: white;
+        color: cyan;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1em;
+        margin: 4px 4px;
+        width:inherit;
+      }
+      .graphBtn:hover,
+      .graphBtn:focus {
+        background-color: cyan;
+        color: white;
+      }
+      /*#subButton {
+        overflow:scroll;
+        height:13vh;
+      }*/
     </style>
     <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
 
@@ -165,8 +187,8 @@
           </div>
 
           <div id="mainButton">
-            <button type="button" name="btn_barChart" id="btn_barChart">Bar Chart</button>
-            <button type="button" name="btn_lineChart" id="btn_lineChart">Line Chart</button>
+            <button type="button" name="btn_barChart" id="btn_barChart" class="graphBtn">Bar Chart</button>
+            <button type="button" name="btn_lineChart" id="btn_lineChart" class="graphBtn">Line Chart</button>
           </div>
         <div id="subButton">
         </div>
@@ -334,6 +356,7 @@ var subbuttonDiv = document.getElementById("subButton");
       button.appendChild(t);
       button.value=response;
       button.setAttribute('id', response+"-btn");
+      button.setAttribute('class', "graphBtn");
       button.addEventListener("click", function(){
         displayLineChart(d, button.value);
       }, false);
@@ -406,8 +429,15 @@ var subbuttonDiv = document.getElementById("subButton");
 
   }
 
-  document.getElementById("btn_barChart").addEventListener("click", loadBarChart);
-  document.getElementById("btn_lineChart").addEventListener("click", loadLineChart);
+  document.getElementById("btn_barChart").addEventListener("click", function(){
+    loadBarChart();
+    document.getElementById("subButton").style.height = "0";
+  }, false);
+  document.getElementById("btn_lineChart").addEventListener("click", function(){
+    loadLineChart();
+    document.getElementById("subButton").style.overflow = "scroll";
+    document.getElementById("subButton").style.height = "13vh";
+  }, false);
   window.addEventListener('DOMContentLoaded', (event) => {
       loadBarChart();
   });
