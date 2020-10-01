@@ -120,11 +120,11 @@ def training(request, template_name="training.html"):
 
 def retrieveCorpus():
     import os
-    root_dir = "train_data\chatterbot_corpus\data"
+    root_dir = "train_data/chatterbot_corpus/data"
     corpus_list = {}
     for dir_, _, files in os.walk(root_dir):
-        corpus_list[dir_.replace("train_data\\chatterbot_corpus\\data\\", "")]=files
-    del corpus_list["train_data\\chatterbot_corpus\\data"]
+        corpus_list[dir_.replace('\\','/').replace("train_data/chatterbot_corpus/data/", "")]=files
+    del corpus_list["train_data/chatterbot_corpus/data"]
     return corpus_list
 
 def trainer(train_option, data):
