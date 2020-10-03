@@ -5,37 +5,156 @@
 <!doctype html>
 <html>
 <head>
-    <title>Chosen</title>
-    {% bootstrap_css %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="/blog/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/blog/static/css/screen.css">
+  <title>Chosen</title>
+  {% bootstrap_css %}
 
     <link href="{% static 'django_tables2/bootstrap.css' %}" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        {% block body %}
-        <div class="row">
-            <div class="col-sm-10">
-                <div class="pull-right">
-                    {% if view.export_formats %}
-                        {% for format in view.export_formats %}
-                        <a href="{% export_url format %}" class="btn btn-xs btn-default">
-                            download  <code>.{{ format }}</code>
-                        </a>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                {% if filter %}
-                    <form action="" method="get" class="form form-inline">
-                        {% bootstrap_form filter.form layout='inline' %}
-                        {% bootstrap_button 'filter' %}
-                    </form>
-                {% endif %}
+  <header id="mainmenu-header">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">SimpleBot</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../chatbot/" >Chat</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../training/" >Training</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="" >Analysis</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Option</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="#">Action 1</a>
+              <a class="dropdown-item" href="#">Action 2</a>
+              <a class="dropdown-item" href="#">Action 3</a>
             </div>
-            <div class="col-sm-10">
-                {% render_table table %}
-            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
+    </nav>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="../dashboard/">
+                <span data-feather="home"></span>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="">
+                <span data-feather="file"></span>
+                Database <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="shopping-cart"></span>
+                Data #2
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="users"></span>
+                Data #3
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="bar-chart-2"></span>
+                Reports
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="layers"></span>
+                Integrations
+              </a>
+            </li>
+          </ul>
+
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Saved reports</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Current month
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Last quarter
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Year-end
+              </a>
+            </li>
+          </ul>
         </div>
-        {% endblock %}
+      </nav>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <div class="container">
+              {% block body %}
+              <div class="row">
+                  <div class="col-sm-10">
+                      <div class="pull-right">
+                          {% if view.export_formats %}
+                              {% for format in view.export_formats %}
+                              <a href="{% export_url format %}" class="btn btn-xs btn-default">
+                                  download  <code>.{{ format }}</code>
+                              </a>
+                              {% endfor %}
+                          {% endif %}
+                      </div>
+                      {% if filter %}
+                          <form action="" method="get" class="form form-inline">
+                              {% bootstrap_form filter.form layout='inline' %}
+                              {% bootstrap_button 'filter' %}
+                          </form>
+                      {% endif %}
+                  </div>
+                  <div class="col-sm-10">
+                      {% render_table table %}
+                  </div>
+              </div>
+              {% endblock %}
+          </div>
+        <footer>
+          <small>Site content and design by Yuzhe Lim</small>
+        </footer>
+      </main>
     </div>
+  </div>
 </body>
 </html>
