@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'chatterbot.ext.django_chatterbot',
+    "django_filters",
+    "bootstrap3",
+    "bootstrap4",
+    "django_tables2",
 ]
 
 MIDDLEWARE = [
