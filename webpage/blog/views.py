@@ -6,21 +6,28 @@ from django.views.decorators.csrf import csrf_exempt
 from chatterbot import ChatBot
 from chatterbot.ext.django_chatterbot.models import Statement, Tag
 from django.db.models import Count, Max, Sum
-from chatterbot.trainers import ListTrainer #train chatbot on a custom list of statements 
+from chatterbot.trainers import ListTrainer #train chatbot on a custom list of statements
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from django.db.models.functions import TruncDay
 from datetime import datetime
 
+#Import for Django-tables and django-filter
+from django_tables2 import SingleTableMixin
+from django_tables2.export.views import ExportMixin
+from django_filters.views import FilterView
+from blog.tables import StatementTable
+from blog.filters import StatementFilter
+
 # Create your views here.
- 
+
 """
 Instantiating a ChatBot Instance
 """
 #chatbot will be set to read_only to avoid learning after training
 # Train based on the english corpus
 chatbot1 = ChatBot(name = 'chatbot1',
-                  read_only = False,                  
-                  logic_adapters = ["chatterbot.logic.BestMatch"],                 
+                  read_only = False,
+                  logic_adapters = ["chatterbot.logic.BestMatch"],
                   storage_adapter = "chatterbot.storage.DjangoStorageAdapter")
                   #database_uri='mysql://root:G7h7y7%40%40@127.0.0.1:3306/firstblog')
 
@@ -94,7 +101,7 @@ def dashboard(request, template_name="dashboard.html"):
         temp_key=responses['in_response_to']
         timeStamp = responses['date']
         date = timeStamp.strftime("%D")
-    
+
         if(temp_key in resp_count_dict.keys()):
             resp_count_dict[temp_key].append([responses['count'], date])
         else:
@@ -108,14 +115,14 @@ def dashboard(request, template_name="dashboard.html"):
 
 @csrf_exempt
 def training(request, template_name="training.html"):
-    
+
     if request.method == 'POST':
         train_option = request.POST['train_option']
         result = trainer(int(train_option), request)
         return HttpResponse(result)
     else:
         corpusDict = retrieveCorpus()
-        context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)} 
+        context = {'title': 'Chatbot 1.0', 'corpusDict':json.dumps(corpusDict)}
     return render(request, template_name, context)
 
 def retrieveCorpus():
@@ -144,18 +151,30 @@ def trainer(train_option, data):
 
         return(resultStatement)
 
-    
+
     elif(train_option == 3):
         manual_conversation = [
             data.POST['inResponseTo'],
             data.POST['responseText']
         ]
-        
+
         #Initializing Trainer Object
         trainer = ListTrainer(chatbot1)
-        
+
         #Training BankBot
         trainer.train(manual_conversation)
         return("Manual training has been completed")
-        
-    
+
+class FilteredStatementView(ExportMixin, SingleTableMixin, FilterView):
+    table_class = StatementTable
+    model = Statement
+    template_name = "bootstrap_template.html"
+
+    filterset_class = StatementFilter
+
+    export_formats = ("csv", "xls")
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def get_table_kwargs(self):
+        return {"template_name": "django_tables2/bootstrap.html"}
