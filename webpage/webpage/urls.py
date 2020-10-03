@@ -28,6 +28,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard),
     path('training/', views.training),
     path('updates/', views.updates),
+    path("class-based-filtered/", views.FilteredStatementView.as_view(), name="filtertableview"),
 ]
 
 if settings.DEBUG == True:
