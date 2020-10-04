@@ -188,6 +188,7 @@
           <div id="mainButton">
             <button type="button" name="btn_barChart" id="btn_barChart" class="graphBtn">Bar Chart</button>
             <button type="button" name="btn_lineChart" id="btn_lineChart" class="graphBtn">Line Chart</button>
+            <button type="button" name="btn_pieChart" id="btn_pieChart" class="graphBtn">Pie Chart</button>
           </div>
         <div id="subButton">
         </div>
@@ -455,8 +456,67 @@ var subbuttonDiv = document.getElementById("subButton");
     document.getElementById("subButton").style.overflow = "scroll";
     document.getElementById("subButton").style.height = "13vh";
   }, false);
+  document.getElementById("btn_pieChart").addEventListener("click", function(){
+    loadPieChart();
+    document.getElementById("subButton").style.height = "0";
+  }, false);
   window.addEventListener('DOMContentLoaded', (event) => {
       loadBarChart();
   });
+
+  function loadPieChart() {
+    while (subbuttonDiv.firstChild) {
+      subbuttonDiv.removeChild(subbuttonDiv.firstChild);
+    }
+
+    var conv_count = [];
+    {% for conv in conversation_count %}
+      conv_count.push("{{conv.conv_count}}");
+    {% endfor %}
+
+    'use strict'
+
+    feather.replace()
+
+    // Graphs
+    var chartContent = document.getElementById('chartContent');
+    chartContent.innerHTML = '&nbsp;';
+    $('#chartContent').append('<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>');
+
+    ctx = $("#myChart").get(0).getContext("2d");
+
+    const totalCount = conv_count.reduce(function(a, b){
+        return Number(a) + Number(b);
+    }, 0);
+    var percentArr = [(conv_count[0]/totalCount*100).toFixed(2), (conv_count[1]/totalCount*100).toFixed(2)];
+
+    var labelArr = ['Training: '+conv_count[0] +' ('+ percentArr[0]+'%)', 'Actual Conversation: '+conv_count[1] +' ('+ percentArr[1]+'%)'];
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labelArr,
+        datasets: [{
+          data: conv_count,
+          backgroundColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(75, 0, 130, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(42, 248, 207, 1)'
+          ],
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Total Conversation'
+        }
+      }
+    })
+
+  }
 
 </script>
