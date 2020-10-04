@@ -273,12 +273,30 @@ var subbuttonDiv = document.getElementById("subButton");
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: in_response_toArr,
+        labels: in_response_toArr.slice(0, 8),
         datasets: [{
           data: resp_freqArr,
           lineTension: 0,
-          backgroundColor: 'cyan',
-          borderColor: '#007bff',
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(74, 0, 130, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(42, 248, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(75, 0, 130, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(42, 248, 207, 1)'
+          ],
           borderWidth: 4,
           pointBackgroundColor: '#007bff'
         }]
@@ -325,7 +343,7 @@ var subbuttonDiv = document.getElementById("subButton");
     var countArr = [];
     var dateArr = [];
 
-  rando="Hi";
+    rando="Hi";
     {% for responses in resp_count_dict.Hi %}
       temp_string = "{{ responses|safe }}".replace(/[[\]]/g,'').replace(/'/g,"");
       temp_arr = temp_string.split(",");
@@ -333,7 +351,7 @@ var subbuttonDiv = document.getElementById("subButton");
       dateArr.push(temp_arr[1]);
       //alert(temp_arr[1]);
     {% endfor %}
-*/
+    */
     d={};
     {% for key, value in resp_count_dict.items %}
       if (!d["{{key}}"]) {
@@ -342,26 +360,26 @@ var subbuttonDiv = document.getElementById("subButton");
       d["{{key}}"].push("{{value|safe}}");
     {% endfor %}
 
-  displayLineChart(d, Object.keys(d)[0]);
-  resp_keys = Object.keys(d);
-  while (subbuttonDiv.firstChild) {
-    subbuttonDiv.removeChild(subbuttonDiv.firstChild);
-  }
-  for(var x = 0; x < resp_keys.length; x++){
-    (function () {
-      response=resp_keys[x];
-      var button = document.createElement('button');
-      var t = document.createTextNode(response);
-      button.appendChild(t);
-      button.value=response;
-      button.setAttribute('id', response+"-btn");
-      button.setAttribute('class', "graphBtn");
-      button.addEventListener("click", function(){
-        displayLineChart(d, button.value);
-      }, false);
-      subbuttonDiv.appendChild(button);
-    }()); // immediate invocation
-  }
+    displayLineChart(d, Object.keys(d)[0]);
+    resp_keys = Object.keys(d);
+    while (subbuttonDiv.firstChild) {
+      subbuttonDiv.removeChild(subbuttonDiv.firstChild);
+    }
+    for(var x = 0; x < resp_keys.length; x++){
+      (function () {
+        response=resp_keys[x];
+        var button = document.createElement('button');
+        var t = document.createTextNode(response);
+        button.appendChild(t);
+        button.value=response;
+        button.setAttribute('id', response+"-btn");
+        button.setAttribute('class', "graphBtn");
+        button.addEventListener("click", function(){
+          displayLineChart(d, button.value);
+        }, false);
+        subbuttonDiv.appendChild(button);
+      }()); // immediate invocation
+    }
 
 
   }
