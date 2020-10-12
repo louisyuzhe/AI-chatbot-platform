@@ -187,8 +187,9 @@
 </html>
 
 <script type="text/javascript">
+  var app;
   window.onload = function () {
-    var app = new Vue({
+    app = new Vue({
       delimiters: ['[[', ']]'],
       el: '#app',
       data: {
@@ -248,6 +249,11 @@
       },
       }
     });
+
+    //For Speech Recognition
+    updateCountry();
+    select_dialect.selectedIndex = 6;
+    showInfo('info_start');
   };
 
   /*
@@ -264,12 +270,6 @@
 
   for (var i = 0; i < langs.length; i++) {
     select_language.options[i] = new Option(langs[i][0], i);
-  }
-
-  window.onload = function () {
-    updateCountry();
-    select_dialect.selectedIndex = 6;
-    showInfo('info_start');
   }
 
   function updateCountry() {
@@ -431,6 +431,39 @@
   }
 
   function sendMessage() {
-    alert(document.getElementById('final_span').innerHTML);
+    userInput = document.getElementById('final_span').innerHTML;
+
+    if (userInput.length > 0) {
+      var message = {
+        'text': userInput,
+        'user': true,
+        'chat_bot': false,
+      };
+      app.messages.push(message);
+
+      //just incase
+      app.send_blank = false;
+      app.placeholder = "Send a message to the chatbot...";
+
+      fetch("/get-response/", {
+            body: JSON.stringify({'message': message['text']}),
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+              'user-agent': 'Mozilla/5.0',
+              'content-type': 'application/json'
+            },
+            method: 'POST',
+            mode: 'cors',
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            })
+            .then(response => response.json()).then((json) => {
+                app.messages.push(json['message'])
+          })
+    } else {
+      app.send_blank = true;
+      app.placeholder = "Please put in some text";
+    }
   }
 </script>
