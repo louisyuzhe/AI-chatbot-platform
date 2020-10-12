@@ -162,6 +162,10 @@
               <p>
             </div>
             <div class="center">
+              <div class="sidebyside">
+                <button id="send_button" class="button" onclick="sendButton()">Send</button>
+                <div id="send_btn_info" class="info">Text sent.</div>
+              </div>
               <p>
               <div id="div_language">
                 <select id="select_language" onchange="updateCountry()"></select>
@@ -246,7 +250,9 @@
     });
   };
 
-  //Speech Recognition
+  /*
+  Speech Recognition
+  */
   var langs =
   [['English',         ['en-AU', 'Australia'],
                        ['en-CA', 'Canada'],
@@ -259,9 +265,12 @@
   for (var i = 0; i < langs.length; i++) {
     select_language.options[i] = new Option(langs[i][0], i);
   }
-  updateCountry();
-  select_dialect.selectedIndex = 6;
-  showInfo('info_start');
+
+  window.onload = function () {
+    updateCountry();
+    select_dialect.selectedIndex = 6;
+    showInfo('info_start');
+  }
 
   function updateCountry() {
     for (var i = select_dialect.options.length - 1; i >= 0; i--) {
@@ -330,7 +339,7 @@
         range.selectNode(document.getElementById('final_span'));
         window.getSelection().addRange(range);
       }
-      alert(document.getElementById('final_span').innerHTML)
+      document.getElementById("send_button").disabled = false;
     };
 
     recognition.onresult = function(event) {
@@ -345,9 +354,9 @@
       final_transcript = capitalize(final_transcript);
       final_span.innerHTML = linebreak(final_transcript);
       interim_span.innerHTML = linebreak(interim_transcript);
-      /*if (final_transcript || interim_transcript) {
+      if (final_transcript || interim_transcript) {
         showButtons('inline-block');
-      }*/
+      }
     };
   }
 
@@ -380,6 +389,7 @@
     interim_span.innerHTML = '';
     start_img.src = '/blog/static/media/mic-slash.gif';
     showInfo('info_allow');
+    showButtons('none');
     start_timestamp = event.timeStamp;
   }
 
@@ -397,4 +407,30 @@
   }
 
   var current_style;
+  function showButtons(style) {
+    if (style == current_style) {
+      return;
+    }
+    current_style = style;
+    send_button.style.display = style;
+    send_button.disabled = true;
+    send_btn_info.style.display = 'none';
+  }
+
+  function sendButton() {
+    if (recognizing) {
+      send_text_django = true;
+      recognizing = false;
+      recognition.stop();
+    } else {
+      sendMessage();
+    }
+    send_button.style.display = 'none';
+    send_btn_info.style.display = 'inline-block';
+    showInfo('');
+  }
+
+  function sendMessage() {
+    alert(document.getElementById('final_span').innerHTML);
+  }
 </script>
