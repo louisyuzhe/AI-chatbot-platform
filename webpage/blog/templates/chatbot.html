@@ -176,6 +176,7 @@
           </div>
         </div>
         <input type="button" id="changeInputMode" value="Change To Voice Input"></input>
+        <input type="button" id="enableVoiceResp" value="Enable voice response"></input>
       </div>
     </main>
     <footer>
@@ -232,6 +233,10 @@
                 })
                 .then(response => response.json()).then((json) => {
                     this.messages.push(json['message'])
+                    if (voiceRespEnable) {
+                      speechSynthesizer.text = json['message']['text'];
+                      window.speechSynthesis.speak(speechSynthesizer);
+                    }
               })
         } else {
           this.send_blank = true;
@@ -257,6 +262,7 @@
     showInfo('info_start');
     document.getElementById("changeInputMode").onclick = function() {changeInputMode()};
     document.getElementById("SpeechRecognition-box").style.display = "none";
+    document.getElementById("enableVoiceResp").onclick = function() {enableVoiceResp()};
   };
 
   /*
@@ -463,6 +469,10 @@
             })
             .then(response => response.json()).then((json) => {
                 app.messages.push(json['message'])
+                if (voiceRespEnable) {
+                  speechSynthesizer.text = json['message']['text'];
+                  window.speechSynthesis.speak(speechSynthesizer);
+                }
           })
     } else {
       app.send_blank = true;
@@ -481,6 +491,32 @@
       document.getElementById("changeInputMode").value = "Change To Text Input";
       manual.style.display = "none";
       voice.style.display = "block";
+    }
+  }
+
+  /*
+  Voice Response
+  */
+  var speechSynthesizer='';
+  var voiceRespEnable = false;
+  if ('speechSynthesis' in window) {
+    // Speech Synthesis supported
+    //alert("Your browser support text to speech!");
+    speechSynthesizer  = new SpeechSynthesisUtterance();
+    document.getElementById("enableVoiceResp").style.display = "inline";
+  } else {
+    // Speech Synthesis Not Supported
+    //alert("Sorry, your browser doesn't support text to speech!");
+    document.getElementById("enableVoiceResp").style.display = "none";
+  }
+
+  function enableVoiceResp() {
+    if (voiceRespEnable) {
+      document.getElementById("enableVoiceResp").value = "Enable voice response";
+      voiceRespEnable = false;
+    } else {
+      document.getElementById("enableVoiceResp").value = "Disable voice response";
+      voiceRespEnable = true;
     }
   }
 </script>
