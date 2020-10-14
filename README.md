@@ -27,10 +27,10 @@ Features Offer:
 [image5]: ./README_media/admin_page1.png "Screenshot of admin login"
 [image6]: ./README_media/admin_page2.png "Screenshot of admin page"
 [image7]: ./README_media/mysql.PNG "Screenshot of MySQL server"
-[image8]: ./README_media/barchart.PNG "Bar chart of visualization page"
-[image9]: ./README_media/linechart.PNG "Line chart of visualization page"
-[image10]: ./README_media/piechart.PNG "Pie chart of visualization page"
-[image11]: ./README_media/pivot_table.PNG "Pivot Table of visualization page"
+[image8]: ./README_media/barchart.png "Bar chart of visualization page"
+[image9]: ./README_media/linechart.png "Line chart of visualization page"
+[image10]: ./README_media/piechart.png "Pie chart of visualization page"
+[image11]: ./README_media/pivot_table.png "Pivot Table of visualization page"
 
 ---
 ## Preview
