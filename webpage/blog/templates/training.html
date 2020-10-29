@@ -307,8 +307,13 @@
     })
   });
 
+  englishOnly=true;
   $('#corpusBtn').click(function(e){
     e.preventDefault();
+    if(englishOnly==true && document.getElementById("corpusFull").value != 'english'){
+      alert("Features under development. \nTraining of SimpleBot is currently unavailable for this language module.");
+      return false;
+    }
     document.getElementById("trainProcess").value += "\nCorpus module training started";
     $.ajax({
         type: 'POST',
