@@ -150,7 +150,7 @@
                   <p>No files currently selected for upload</p>
                 </li>
               </ul>
-              <button type="button" class="btn btn-lg btn-block btn-primary">Train</button>
+              <button type="button" id="cdatasetBtn" name="cdatasetBtn" class="btn btn-lg btn-block btn-primary">Train</button>
             </div>
           </div>
           <div class="card mb-4 shadow-sm">
@@ -311,7 +311,7 @@
   $('#corpusBtn').click(function(e){
     e.preventDefault();
     if(englishOnly==true && document.getElementById("corpusFull").value != 'english'){
-      alert("Features under development. \nTraining of SimpleBot is currently unavailable for this language module.");
+      alert("Training of SimpleBot is currently unavailable for this language module.");
       return false;
     }
     document.getElementById("trainProcess").value += "\nCorpus module training started";
@@ -323,5 +323,12 @@
             document.getElementById("trainProcess").value += "\n"+data;
         }
     })
+  });
+
+
+  $('#cdatasetBtn').click(function(e){
+    e.preventDefault();
+    alert("Features under development.");
+    return false;
   });
 </script>
