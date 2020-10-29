@@ -256,7 +256,7 @@ var subbuttonDiv = document.getElementById("subButton");
     var in_response_toArr = [];
     var resp_freqArr = [];
     {% for responses in in_response_to_query %}
-      in_response_toArr.push("{{responses.in_response_to}}");
+      in_response_toArr.push("{{responses.in_response_to|safe }}");
       resp_freqArr.push("{{responses.resp_freq}}");
     {% endfor %}
 
@@ -355,10 +355,10 @@ var subbuttonDiv = document.getElementById("subButton");
     */
     d={};
     {% for key, value in resp_count_dict.items %}
-      if (!d["{{key}}"]) {
-          d["{{key}}"] = [];
+      if (!d["{{key|safe}}"]) {
+          d["{{key|safe}}"] = [];
       }
-      d["{{key}}"].push("{{value|safe}}");
+      d["{{key|safe}}"].push("{{value|safe}}");
     {% endfor %}
 
     displayLineChart(d, Object.keys(d)[0]);
