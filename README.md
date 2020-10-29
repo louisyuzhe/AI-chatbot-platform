@@ -16,7 +16,7 @@ Features Offer:
 
 * 5: Administrator management tools
 
-[Link to Website](http://simplebot.xtie.net)
+[Link to Website](https://louisyuzhe.github.io/simplebot/)
 
 [//]: # (Image References)
 
